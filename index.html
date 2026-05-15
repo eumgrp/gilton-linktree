@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="description" content="살리는 교회, 살려는 성도 - 길튼교회 공식 링크 모음" />
+  <title>길튼교회</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100vh;
+      font-family: 'Noto Sans KR', sans-serif;
+      /* 참조 링크처럼: 밝은 회색~흰색 배경, 양옆에 은은한 파란 빛 */
+      background: #f2f4f8;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 양쪽 가장자리 은은한 파란 빛(glow) */
+    body::before, body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      width: 180px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::before {
+      left: 0;
+      background: radial-gradient(ellipse at left center, rgba(130,170,255,0.18) 0%, transparent 70%);
+    }
+    body::after {
+      right: 0;
+      background: radial-gradient(ellipse at right center, rgba(130,170,255,0.18) 0%, transparent 70%);
+    }
+
+    /* ── 레이아웃 ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 44px 20px 60px;
+    }
+
+    /* ── 프로필 ── */
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .avatar img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+    }
+
+    .profile-name {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      color: #111;
+    }
+
+    .profile-sub {
+      font-size: 13px;
+      color: #888;
+    }
+
+    /* ── 유튜브 영상 카드 (참조처럼 상단에 바로 영상 카드) ── */
+    .video-card {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid rgba(0,0,0,0.1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      animation: slideUp 0.5s ease 0.05s both;
+      background: #000;
+    }
+    .video-card iframe {
+      display: block;
+      width: 100%;
+      height: 210px;
+      border: none;
+    }
+    .video-label {
+      background: #fff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .video-label .yt-icon {
+      color: #ff0000;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .video-label .vt {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111;
+    }
+    .video-label .vs {
+      font-size: 12px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    /* ── 일반 링크 버튼 (참조 스타일: 흰 배경 + 검은 테두리 + 회색 그림자) ── */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      text-decoration: none;
+      color: #111;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      animation: slideUp 0.5s ease both;
+    }
+    .link-item:hover {
+      background: #f7f7f7;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      transform: translateY(-1px);
+    }
+    .link-item:active {
+      transform: scale(0.98);
+      background: #f0f0f0;
+    }
+
+    .link-icon {
+      font-size: 22px;
+      width: 32px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .link-text {
+      flex: 1;
+    }
+    .link-main {
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+      color: #111;
+    }
+    .link-sub {
+      font-size: 12px;
+      color: #888;
+    }
+    .link-arrow {
+      font-size: 18px;
+      color: #bbb;
+    }
+
+    /* 버튼 애니메이션 딜레이 */
+    .link-item:nth-child(1) { animation-delay: 0.12s; }
+    .link-item:nth-child(2) { animation-delay: 0.20s; }
+    .link-item:nth-child(3) { animation-delay: 0.28s; }
+    .link-item:nth-child(4) { animation-delay: 0.36s; }
+    .link-item:nth-child(5) { animation-delay: 0.44s; }
+
+    /* ── 주소 ── */
+    .address {
+      margin-top: 12px;
+      padding: 14px 18px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      text-align: center;
+      animation: slideUp 0.5s ease 0.52s both;
+    }
+    .address p {
+      font-size: 12px;
+      color: #999;
+      line-height: 1.9;
+    }
+
+    /* ── 푸터 ── */
+    .footer {
+      text-align: center;
+      margin-top: 36px;
+      animation: fadeIn 0.5s ease 0.6s both;
+    }
+    .footer p {
+      font-size: 11px;
+      color: #ccc;
+      letter-spacing: 2px;
+    }
+
+    /* ── 애니메이션 ── */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 프로필 -->
+    <div class="profile">
+      <div class="avatar">
+        <img src="로고.png" alt="길튼교회 로고" />
+      </div>
+      <h1 class="profile-name">길튼교회</h1>
+      <p class="profile-sub">살리는 교회, 살려는 성도</p>
+    </div>
+
+    <!-- 유튜브 영상 카드 (바로 재생) -->
+    <div class="video-card">
+      <iframe
+        src="https://www.youtube.com/embed/2funFcyWaM4?autoplay=0&rel=0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        title="길튼교회 설교 영상">
+      </iframe>
+      <div class="video-label">
+        <span class="yt-icon">▶</span>
+        <div>
+          <div class="vt">설교 영상 바로 보기</div>
+          <div class="vs">길튼교회 유튜브 라이브</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 링크 버튼들 -->
+    <div class="links">
+
+      <a id="link-worship" class="link-item" href="https://www.giltonchurch.org/%EC%98%88%EB%B0%B0%EC%95%88%EB%82%B4" target="_blank" rel="noopener">
+        <span class="link-icon">🙏</span>
+        <div class="link-text">
+          <div class="link-main">예배 안내</div>
+          <div class="link-sub">주일·수요·새벽기도 시간표</div>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a id="link-map" class="link-item" href="https://www.giltonchurch.org/%EC%9C%84%EC%B9%98%EC%95%88%EB%82%B4" target="_blank" rel="noopener">
+        <span class="link-icon">📍</span>
+        <div class="link-text">
+          <div class="link-main">위치 안내</div>
+          <div class="link-sub">인천 남동구 인주대로 664</div>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a id="link-news" class="link-item" href="https://www.giltonchurch.org/%EA%B5%90%ED%9A%8C%EC%86%8C%EC%8B%9D" target="_blank" rel="noopener">
+        <span class="link-icon">📋</span>
+        <div class="link-text">
+          <div class="link-main">교회소식</div>
+          <div class="link-sub">주보 &amp; 공지사항</div>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a id="link-register" class="link-item" href="https://docs.google.com/forms/d/e/1FAIpQLSff81E1WLwpgR-YK5YNviWK6Q19wdJVceGwHLw-aVT1kK5g2Q/viewform" target="_blank" rel="noopener">
+        <span class="link-icon">✍️</span>
+        <div class="link-text">
+          <div class="link-main">온라인 성도 등록</div>
+          <div class="link-sub">처음 오시는 분을 환영합니다</div>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a id="link-phone" class="link-item" href="tel:032-434-0191">
+        <span class="link-icon">📞</span>
+        <div class="link-text">
+          <div class="link-main">전화 문의</div>
+          <div class="link-sub">032-434-0191</div>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+    </div>
+
+    <!-- 주소 -->
+    <div class="address">
+      <p>인천광역시 남동구 인주대로 664<br />메인프라자 5층 · 길튼교회</p>
+    </div>
+
+    <!-- 푸터 -->
+    <div class="footer">
+      <p>GILTON CHURCH</p>
+    </div>
+
+  </div>
+</body>
+</html>
