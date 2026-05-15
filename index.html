@@ -102,6 +102,9 @@
       border: 1px solid rgba(0,0,0,0.1);
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       animation: slideUp 0.5s ease 0.05s both;
+    }
+    .video-card.second {
+      animation: slideUp 0.5s ease 0.15s both;
       background: #000;
     }
     .video-card iframe {
@@ -247,18 +250,35 @@
       <p class="profile-sub">살리는 교회, 살려는 성도</p>
     </div>
 
-    <!-- 유튜브 영상 카드 (바로 재생) -->
+    <!-- 유튜브 영상 카드 1: 교회소개 -->
     <div class="video-card">
       <iframe
-        src="https://www.youtube.com/embed/2funFcyWaM4?autoplay=0&rel=0"
+        src="https://www.youtube.com/embed/EwD6P7JHviM?autoplay=0&rel=0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
-        title="길튼교회 설교 영상">
+        title="길튼교회 교회소개 영상">
       </iframe>
       <div class="video-label">
         <span class="yt-icon">▶</span>
         <div>
-          <div class="vt">설교 영상 바로 보기</div>
+          <div class="vt">교회소개</div>
+          <div class="vs">길튼교회를 소개합니다</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 유튜브 영상 카드 2: 목사님설교 -->
+    <div class="video-card second">
+      <iframe
+        src="https://www.youtube.com/embed/KU3jiJPLyCI?autoplay=0&rel=0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        title="길튼교회 목사님 설교 영상">
+      </iframe>
+      <div class="video-label">
+        <span class="yt-icon">▶</span>
+        <div>
+          <div class="vt">목사님 설교</div>
           <div class="vs">길튼교회 유튜브 라이브</div>
         </div>
       </div>
